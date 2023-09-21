@@ -61,18 +61,18 @@ function AdressStage({ register, setValue, errors }){
 
                 <InputContainer>
                     <InputContent>
-                    <InputIconContainer>
-                        <InputIcon alt="home-icon" src={HomeIcon} />
-                    </InputIconContainer>
-                    <InputFieldCep
-                    maxLength={9}
-                    name="CEP"
-                    type="text"
-                    value={maskCEP(cep)}
-                    onChange={(e) => setCep(e.target.value)}
-                    onBlur={checkCep} 
-                    />
-                    <InputLabelIcon>CEP DO ENDEREÇO</InputLabelIcon>
+                        <InputIconContainer>
+                            <InputIcon alt="home-icon" src={HomeIcon} />
+                        </InputIconContainer>
+                        <InputFieldCep
+                        maxLength={9}
+                        name="CEP"
+                        type="text"
+                        value={maskCEP(cep)}
+                        onChange={(e) => setCep(e.target.value)}
+                        onBlur={checkCep} 
+                        />
+                        <InputLabelIcon>CEP DO ENDEREÇO</InputLabelIcon>
                     </InputContent>
                     
                 </InputContainer>
@@ -93,49 +93,50 @@ function AdressStage({ register, setValue, errors }){
                         <ErrorMessage>{errors.endereco?.message}</ErrorMessage>
                     </InputContainer>
                   
-                  <InputContent>
-                    <InputFieldShort
-                    type="text" 
-                    {...register("numero")}
-                    />
-                    <InputLabel>NÚMERO</InputLabel>
-                </InputContent>
+                    <InputContent>
+                        <InputFieldShort
+                        type="text" 
+                        {...register("numero")}
+                        />
+                        <InputLabel>NÚMERO</InputLabel>
+                    </InputContent>
+               
                 </LineContainerInput>
                 
                 <LineContainerInput>
-                <InputContent>
-                  <InputFieldMedium
-                  type="text" 
-                  {...register("complemento")}
-                  />
-                  <InputLabel>COMPLEMENTO</InputLabel>
-                </InputContent>
+                    <InputContent>
+                        <InputFieldMedium
+                        type="text" 
+                        {...register("complemento")}
+                        />
+                        <InputLabel>COMPLEMENTO</InputLabel>
+                    </InputContent>
                 
 
-                <InputContent>
-                  <InputFieldMedium
-                  type="text" 
-                  {...register("bairro")} 
-                  />
-                  <InputLabel>BAIRRO</InputLabel>
-                </InputContent>
+                    <InputContent>
+                        <InputFieldMedium
+                        type="text" 
+                        {...register("bairro")} 
+                        />
+                        <InputLabel>BAIRRO</InputLabel>
+                    </InputContent>
                 
-                <InputContent>
-                  <InputFieldMedium
-                  type="text" 
-                  {...register("cidade")}
-                  />
-                  <InputLabel>CIDADE</InputLabel>
-                </InputContent>
-                
-                <InputContent>
-                    <InputFieldShort 
-                    type="text" 
-                    {...register("estado")}
-                    />
-                    <InputLabel>ESTADO</InputLabel>
-                </InputContent>
-                
+                    <InputContent>
+                        <InputFieldMedium
+                        type="text" 
+                        {...register("cidade")}
+                        />
+                        <InputLabel>CIDADE</InputLabel>
+                    </InputContent>
+                    
+                    <InputContent>
+                        <InputFieldShort 
+                        type="text" 
+                        {...register("estado")}
+                        />
+                        <InputLabel>ESTADO</InputLabel>
+                    </InputContent>
+                    
                 </LineContainerInput>
             </InputGroupContainer>
           </FormStage>
