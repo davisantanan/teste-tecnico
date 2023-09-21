@@ -20,13 +20,10 @@ import {
     StageTitle 
 } from "../../styles";
 import HomeIcon from '../../assets/botao-home.png';
-import { useState } from "react";
+import { Controller } from "react-hook-form";
 
 
-function AdressStage({ register, setValue, errors }){
-
-    const [ cep, setCep ] = useState('');
-    const [cepValid, setCepValid] = useState(true);
+function AdressStage({ register, setValue, errors, control }){
 
     const checkCep = (e) => {
         if( !e || !e.target || !e.target.value) return;
@@ -43,15 +40,7 @@ function AdressStage({ register, setValue, errors }){
         }).catch((err) => console.log(err)) 
     }
 
-    const handleBur = () => {
-        setCepValid(cep.trim() !== '')
-    }
-
-    if(cepValid){
-        checkCep();
-    }
-
-    const maskCEP = value => {
+    const maskCEP = (value) => {
         return value.replace(/\D/g, "").replace(/^(\d{5})(\d{3})+?$/, "$1-$2")
     }
 
@@ -71,17 +60,25 @@ function AdressStage({ register, setValue, errors }){
                         <InputIconContainer>
                             <InputIcon alt="home-icon" src={HomeIcon} />
                         </InputIconContainer>
-                        <InputFieldCep
-                        maxLength={9}
-                        name="CEP"
-                        type="text"
-                        value={maskCEP(cep)}
-                        onChange={(e) => setCep(e.target.value)}
-                        onBlur={handleBur} 
+                        <Controller
+                        name="cep"
+                        control={control}
+                        defaultValue=""
+                        render={({ field }) => (
+                            <InputFieldCep
+                            maxLength={9}
+                            type="text"
+                            {...field}
+                            value={maskCEP(field.value)}
+                            onChange={(e) => {
+                                field.onChange(maskCEP(e.target.value))
+                            }}
+                            />
+                        )} 
                         />
                         <InputLabelIcon>CEP DO ENDEREÇO</InputLabelIcon>
                     </InputContent>
-                    {!cepValid && <ErrorMessage>Campo obrigatório</ErrorMessage>}
+                    <ErrorMessage>{errors.cep?.message}</ErrorMessage>
                 </InputContainer>
                 
                 <LineContainerInput>

@@ -46,7 +46,8 @@ const schema = object({
   .test('estados', 'Sigla incorreta', (value) => {
     const states = ['AC', 'AL', 'AM', 'AP', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MG', 'MS', 'MT', 'PA', 'PB', 'PE', 'PI', 'PR', 'RJ', 'RN', 'RO', 'RR', 'RS', 'SC', 'SE', 'SP', 'TO'];
     return states.includes(value);
-  })
+  }),
+  cep: string().required("Campo obrigatório").min(9, "Informe um CEP válido")
 });
 
 function App() {
@@ -81,6 +82,7 @@ function App() {
           register={register}
           setValue={setValue}
           errors={errors}
+          control={control}
           />
           
           <ShippingContainer>
