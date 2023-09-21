@@ -39,7 +39,7 @@ function AdressStage({ register, setValue, errors }){
             setValue('cidade', data.localidade);
             setValue('estado', data.uf)
             console.log(data)
-        })
+        }).catch((err) => console.log(err))
         
     }
 
