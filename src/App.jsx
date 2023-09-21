@@ -38,10 +38,15 @@ const schema = object({
   telefone: string().required("Campo obrigatório"),
   cpf: string().required("Campo obrigatório"),
   endereco: string().required("Campo obrigatório"),
+  complemento: string(),
   numero: string().required("Campo obrigatório"), 
   bairro: string().required("Campo obrigatório"),
   cidade: string().required("Campo obrigatório"),
   estado: string().required("Campo obrigatório")
+  .test('estados', 'Sigla incorreta', (value) => {
+    const states = ['AC', 'AL', 'AM', 'AP', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MG', 'MS', 'MT', 'PA', 'PB', 'PE', 'PI', 'PR', 'RJ', 'RN', 'RO', 'RR', 'RS', 'SC', 'SE', 'SP', 'TO'];
+    return states.includes(value);
+  })
 });
 
 function App() {

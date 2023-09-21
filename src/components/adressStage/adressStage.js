@@ -25,7 +25,8 @@ import { useState } from "react";
 
 function AdressStage({ register, setValue, errors }){
 
-    const [ cep, setCep] = useState('');
+    const [ cep, setCep ] = useState('');
+    const [cepValid, setCepValid] = useState(true);
 
     const checkCep = (e) => {
         if( !e || !e.target || !e.target.value) return;
@@ -39,8 +40,15 @@ function AdressStage({ register, setValue, errors }){
             setValue('cidade', data.localidade);
             setValue('estado', data.uf)
             console.log(data)
-        }).catch((err) => console.log(err))
-        
+        }).catch((err) => console.log(err)) 
+    }
+
+    const handleBur = () => {
+        setCepValid(cep.trim() !== '')
+    }
+
+    if(cepValid){
+        checkCep();
     }
 
     const maskCEP = value => {
@@ -58,7 +66,6 @@ function AdressStage({ register, setValue, errors }){
             <StageDescription>Digite o CEP para onde vamos enviar o seu pedido abaixo.</StageDescription>
             
             <InputGroupContainer>
-
                 <InputContainer>
                     <InputContent>
                         <InputIconContainer>
@@ -70,15 +77,14 @@ function AdressStage({ register, setValue, errors }){
                         type="text"
                         value={maskCEP(cep)}
                         onChange={(e) => setCep(e.target.value)}
-                        onBlur={checkCep} 
+                        onBlur={handleBur} 
                         />
                         <InputLabelIcon>CEP DO ENDEREÇO</InputLabelIcon>
                     </InputContent>
-                    
+                    {!cepValid && <ErrorMessage>Campo obrigatório</ErrorMessage>}
                 </InputContainer>
                 
                 <LineContainerInput>
-                
                     <InputContainer>
                         <InputContent>
                             <InputIconContainer>
@@ -92,15 +98,17 @@ function AdressStage({ register, setValue, errors }){
                         </InputContent>
                         <ErrorMessage>{errors.endereco?.message}</ErrorMessage>
                     </InputContainer>
-                  
-                    <InputContent>
-                        <InputFieldShort
-                        type="text" 
-                        {...register("numero")}
-                        />
-                        <InputLabel>NÚMERO</InputLabel>
-                    </InputContent>
-               
+
+                    <InputContainer>
+                        <InputContent>
+                            <InputFieldShort
+                            type="text" 
+                            {...register("numero")}
+                            />
+                            <InputLabel>NÚMERO</InputLabel>
+                        </InputContent>
+                        <ErrorMessage>{errors.numero?.message}</ErrorMessage>
+                    </InputContainer>                  
                 </LineContainerInput>
                 
                 <LineContainerInput>
@@ -112,31 +120,38 @@ function AdressStage({ register, setValue, errors }){
                         <InputLabel>COMPLEMENTO</InputLabel>
                     </InputContent>
                 
-
-                    <InputContent>
-                        <InputFieldMedium
-                        type="text" 
-                        {...register("bairro")} 
-                        />
-                        <InputLabel>BAIRRO</InputLabel>
-                    </InputContent>
+                    <InputContainer>
+                        <InputContent>
+                            <InputFieldMedium
+                            type="text" 
+                            {...register("bairro")} 
+                            />
+                            <InputLabel>BAIRRO</InputLabel>
+                        </InputContent>
+                        <ErrorMessage>{errors.bairro?.message}</ErrorMessage>
+                    </InputContainer>
                 
-                    <InputContent>
-                        <InputFieldMedium
-                        type="text" 
-                        {...register("cidade")}
-                        />
-                        <InputLabel>CIDADE</InputLabel>
-                    </InputContent>
+                    <InputContainer>
+                        <InputContent>
+                            <InputFieldMedium
+                            type="text" 
+                            {...register("cidade")}
+                            />
+                            <InputLabel>CIDADE</InputLabel>
+                        </InputContent>
+                        <ErrorMessage>{errors.cidade?.message}</ErrorMessage>
+                    </InputContainer>
                     
-                    <InputContent>
-                        <InputFieldShort 
-                        type="text" 
-                        {...register("estado")}
-                        />
-                        <InputLabel>ESTADO</InputLabel>
-                    </InputContent>
-                    
+                    <InputContainer>
+                        <InputContent>
+                            <InputFieldShort 
+                            type="text" 
+                            {...register("estado")}
+                            />
+                            <InputLabel>ESTADO</InputLabel>
+                        </InputContent>
+                        <ErrorMessage>{errors.estado?.message}</ErrorMessage>
+                    </InputContainer>
                 </LineContainerInput>
             </InputGroupContainer>
           </FormStage>
