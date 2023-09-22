@@ -20,10 +20,10 @@ import {
     StageTitle 
 } from "../../styles";
 import HomeIcon from '../../assets/botao-home.png';
-import { Controller } from "react-hook-form";
+import InputMask from 'react-input-mask';
 
 
-function AdressStage({ register, setValue, errors, control }){
+function AdressStage({ register, setValue, errors }){
 
     const checkCep = (e) => {
         if( !e || !e.target || !e.target.value) return;
@@ -35,13 +35,8 @@ function AdressStage({ register, setValue, errors, control }){
             setValue('complemento', data.complemento);
             setValue('bairro', data.bairro);
             setValue('cidade', data.localidade);
-            setValue('estado', data.uf)
-            console.log(data)
+            setValue('estado', data.uf);
         }).catch((err) => console.log(err)) 
-    }
-
-    const maskCEP = (value) => {
-        return value.replace(/\D/g, "").replace(/^(\d{5})(\d{3})+?$/, "$1-$2")
     }
 
     return(
@@ -60,22 +55,17 @@ function AdressStage({ register, setValue, errors, control }){
                         <InputIconContainer>
                             <InputIcon alt="home-icon" src={HomeIcon} />
                         </InputIconContainer>
-                        <Controller
-                        name="cep"
-                        control={control}
-                        defaultValue=""
-                        render={({ field }) => (
-                            <InputFieldCep
-                            maxLength={9}
-                            type="text"
-                            {...field}
-                            value={maskCEP(field.value)}
-                            onChange={(e) => {
-                                field.onChange(maskCEP(e.target.value))
-                            }}
-                            />
-                        )} 
-                        />
+                        <InputMask
+                        mask="99999-999"
+                        maskChar="_"
+                        {...register('cep')}
+                        type="text"
+                        onBlur={checkCep}
+                        >
+                            {(inputProps) => (
+                                <InputFieldCep {...inputProps} />
+                            )}
+                        </InputMask>
                         <InputLabelIcon>CEP DO ENDEREÇO</InputLabelIcon>
                     </InputContent>
                     <ErrorMessage>{errors.cep?.message}</ErrorMessage>

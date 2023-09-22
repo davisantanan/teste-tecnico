@@ -1,31 +1,14 @@
 import { 
   Container, 
   MainContainer, 
-  ShippingContainer,
-  ShippingContainerTitle,
-  CheckBoxContainer,
-  TextCheckBoxContainer,
-  InputCheckBox,
-  LabelCheckBox,
-  DescriptionCheckBox,
-  ValueContainer,
-  InformationCheckBoxContainer,
-  ValueCheckBox,
-  FooterContainer,
-  TextFooter,
-  TextFooterContainer,
-  TextFooterIcon,
-  SubmitButton,
-  IconButton,
 } from "./styles";
-import PadlockIcon from './assets/fechadura.png';
-import ButtonIcon from './assets/continue.png'
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { string, object } from "yup";
 import PessoalInfoStage from "./components/pessoalInfoStage/pessoalInfoStage";
 import AdressStage from "./components/adressStage/adressStage";
+import ShippingStage from "./components/shippingStage/shippingStage";
+import { cpf } from "cpf-cnpj-validator";
 
 
 const schema = object({
@@ -36,18 +19,21 @@ const schema = object({
     return words.length > 1 && words[1].length > 0;
   }),
   telefone: string().required("Campo obrigatório"),
-  cpf: string().required("Campo obrigatório"),
+  cpf: string().required("Campo obrigatório").test('registro', 'CPF inválido', (value) => {
+    return cpf.isValid(value);
+  }),
   endereco: string().required("Campo obrigatório"),
   complemento: string(),
   numero: string().required("Campo obrigatório"), 
   bairro: string().required("Campo obrigatório"),
   cidade: string().required("Campo obrigatório"),
   estado: string().required("Campo obrigatório")
-  .test('estados', 'Sigla incorreta', (value) => {
+  .test('estados', 'Digite uma sigla EX: BA,SP...', (value) => {
     const states = ['AC', 'AL', 'AM', 'AP', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MG', 'MS', 'MT', 'PA', 'PB', 'PE', 'PI', 'PR', 'RJ', 'RN', 'RO', 'RR', 'RS', 'SC', 'SE', 'SP', 'TO'];
     return states.includes(value);
   }),
-  cep: string().required("Campo obrigatório").min(9, "Informe um CEP válido")
+  cep: string().required("Campo obrigatório").min(9, "Informe um CEP válido"),
+  envio: string().required("Escolha uma opção de entrega")
 });
 
 function App() {
@@ -57,7 +43,7 @@ function App() {
     handleSubmit,
     formState: { errors },
     control,
-    setValue
+    setValue,
   } = useForm({ resolver: yupResolver(schema) });
 
   
@@ -65,7 +51,6 @@ function App() {
     console.log(data)
   }
 
-  const [ selectedOption, setSelectedOption ] = useState();
     
   return (
     <Container>
@@ -75,67 +60,18 @@ function App() {
           <PessoalInfoStage
           register={register}
           errors={errors}
-          control={control} 
           />
 
           <AdressStage
           register={register}
           setValue={setValue}
           errors={errors}
-          control={control}
           />
           
-          <ShippingContainer>
-            <ShippingContainerTitle>Opções de entrega:</ShippingContainerTitle>
-            
-            <CheckBoxContainer selectedOption={selectedOption === 13.70}>
-              <InputCheckBox
-              type="radio"
-              value={13.70}
-              checked={selectedOption === 13.70}
-              onChange={(e) => setSelectedOption(parseFloat(e.target.value))}
-              />
-              <InformationCheckBoxContainer>
-                <TextCheckBoxContainer>
-                  <LabelCheckBox>Econômico</LabelCheckBox>
-                  <DescriptionCheckBox>8 dias úteis a partir da postagem</DescriptionCheckBox>
-                </TextCheckBoxContainer>
-                <ValueContainer>
-                  <ValueCheckBox>R$ 13,70</ValueCheckBox>
-                </ValueContainer>
-              </InformationCheckBoxContainer>
-            </CheckBoxContainer>
-
-            <CheckBoxContainer selectedOption={selectedOption === 50.19}>
-              <InputCheckBox
-              type="radio"
-              value={50.19}
-              checked={selectedOption === 50.19}
-              onChange={(e) => setSelectedOption(parseFloat(e.target.value))}
-              />
-              <InformationCheckBoxContainer>
-                <TextCheckBoxContainer>
-                  <LabelCheckBox>Expresso</LabelCheckBox>
-                  <DescriptionCheckBox>7 dias úteis a partir da postagem</DescriptionCheckBox>
-                </TextCheckBoxContainer>
-                <ValueContainer>
-                  <ValueCheckBox>R$ 50,19</ValueCheckBox>
-                </ValueContainer>
-              </InformationCheckBoxContainer>
-            </CheckBoxContainer>
-
-            <FooterContainer>
-              <TextFooterContainer>
-                <TextFooterIcon alt='padlock' src={PadlockIcon} />
-                <TextFooter>Você está em uma página segura.</TextFooter>
-              </TextFooterContainer>
-              <SubmitButton type="submit">
-                <IconButton alt="continue" src={ButtonIcon} />
-                Continuar
-              </SubmitButton>
-            </FooterContainer>
-
-          </ShippingContainer>
+          <ShippingStage
+          control={control}
+          errors={errors}
+          />
 
         </form>
       </MainContainer>
