@@ -38,6 +38,7 @@ export const Tr = styled.tr `
     :first-child{
         background-color: gray;
         border-bottom: 1px solid black;
+        max-width: 150px;
     }
     :last-of-type {
         border-bottom: 1px solid black;

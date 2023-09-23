@@ -352,6 +352,7 @@ export const FooterContainer = styled.div `
     justify-content: space-between;
     align-items: center;
     margin-top: 25px;
+    padding-bottom: 20px;
 
     @media(max-width: 768px){
         flex-direction: column;
