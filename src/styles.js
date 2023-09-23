@@ -2,10 +2,12 @@ import styled from "styled-components";
 
 export const Container = styled.div `
     width: 100%;
+    height: 100vh;
     padding: 20px 0;
     display: flex;
     justify-content: center;
     box-sizing: border-box;
+    background-color: aliceblue;
 `;
 
 export const MainContainer = styled.div `
@@ -25,6 +27,10 @@ export const StageTitle = styled.div `
     align-items: center;
     gap: 10px;
     margin-bottom: 10px;
+
+    @media(max-width: 768px){
+        justify-content: center;
+    }
 `;
 
 export const StageNumberContainer = styled.div `
@@ -54,6 +60,12 @@ export const StageDescription = styled.span `
     color: gray;
     margin: 50px 0 10px 0;
 
+    @media(max-width: 768px){
+        display: flex;
+        text-align: center;
+        margin: 10px 0;
+        padding: 0 20px;
+    }
 `;
 
 export const InputGroupContainer = styled.div `
@@ -73,6 +85,10 @@ export const InputContent = styled.div `
     :focus{
         border: 1px solid #008ae6;
     }
+
+    @media(max-width: 768px){
+        justify-content: center;
+    }
 `;
 
 export const InputIconContainer = styled.div `
@@ -83,6 +99,10 @@ export const InputIconContainer = styled.div `
     height: 100%;
     position: absolute;
     margin-left: 10px;
+    
+    @media(max-width: 768px){
+        display: none;
+    }
 `;
 
 export const InputIcon = styled.img `
@@ -98,6 +118,11 @@ export const InputFieldEmail = styled.input `
     border-radius: 4px;
     outline: none;
     font-size: 14px;
+
+    @media(max-width: 768px){
+        padding: 19px 5px 5px 20px;
+        width: 80%;
+    }
 `;
 
 export const InputLabelIcon = styled.div `
@@ -108,6 +133,10 @@ export const InputLabelIcon = styled.div `
     padding-left: 42px;
     font-size: 12px;
     color: gray;  
+
+    @media(max-width: 768px){
+        padding-left: 0;
+    }
 `;
 
 export const LineContainerInput = styled.div `
@@ -115,6 +144,10 @@ export const LineContainerInput = styled.div `
     display: flex;
     justify-content: center;
     gap: 15px;
+
+    @media(max-width: 768px){
+        flex-direction: column;
+    }
 `;
 
 export const InputFieldName = styled.input `
@@ -125,6 +158,10 @@ export const InputFieldName = styled.input `
     border-radius: 4px;
     outline: none;
     font-size: 14px;
+
+    @media(max-width: 768px){
+        width: 80%;
+    }
 `;
 
 export const InputLabel = styled.div `
@@ -135,6 +172,10 @@ export const InputLabel = styled.div `
     padding-left: 20px;
     font-size: 12px;
     color: gray;  
+
+    @media(max-width: 768px) {
+        padding-left: 0;
+    }
 `;
 
 export const InputFieldMedium = styled.input `
@@ -145,6 +186,10 @@ export const InputFieldMedium = styled.input `
     border-radius: 4px;
     outline: none;
     font-size: 14px;
+
+    @media(max-width: 768px){
+        width: 80%;
+    }
 `;
 
 export const InputContainer = styled.div `
@@ -156,6 +201,10 @@ export const InputMessageContainer = styled.div `
     width: 100%;
     display: flex;
     margin-top: 5px;
+
+    @media(max-width: 768px){
+        justify-content: center;
+    }
 `;
 
 export const CpfMessageIconContainer = styled.div`
@@ -163,6 +212,8 @@ export const CpfMessageIconContainer = styled.div`
     justify-content: center;
     align-items: center;
     margin-right: 5px;
+
+    
 `;
 
 export const CpfMessageIcon = styled.img `
@@ -173,6 +224,10 @@ export const CpfMessageIcon = styled.img `
 export const CpfMessage = styled.span `
     color: gray;  
     font-size: 11px;  
+
+    @media(max-width: 768px){
+        text-align: center;
+    }
 `;
 
 export const InputFieldCep = styled.input `
@@ -183,6 +238,11 @@ export const InputFieldCep = styled.input `
     border-radius: 4px;
     outline: none;
     font-size: 14px;
+
+    @media(max-width: 768px){
+        padding: 19px 5px 5px 20px;
+        width: 80%;
+    }
 `;
 
 export const InputFieldAddress = styled.input `
@@ -193,6 +253,11 @@ export const InputFieldAddress = styled.input `
     border-radius: 4px;
     outline: none;
     font-size: 14px;
+
+    @media(max-width: 768px){
+        padding: 19px 5px 5px 20px;
+        width: 80%;
+    }
 `;
 
 export const InputFieldShort = styled.input `
@@ -203,6 +268,10 @@ export const InputFieldShort = styled.input `
     border-radius: 4px;
     outline: none;
     font-size: 14px;
+
+    @media(max-width: 768px){
+        width: 80%;
+    }
 `;
 
 export const ShippingContainer = styled.div `
@@ -210,6 +279,11 @@ export const ShippingContainer = styled.div `
     display: flex;
     flex-direction: column;
     gap: 10px;
+    
+    @media(max-width: 768px){
+        justify-content: center;
+        align-items: center;
+    }
 `;
 
 export const ShippingContainerTitle = styled.span `
@@ -225,13 +299,16 @@ export const CheckBoxContainer = styled.div `
     align-items: center;
     border: ${({ selectedOption }) => selectedOption ? 'solid 1px #008ae6' : 'solid 1px gray' };
     border-radius: 5px;
+
+    @media(max-width: 768px){
+        width: 80%;
+    }
 `;
 
 export const InformationCheckBoxContainer = styled.div `
     width: 100%;
     justify-content: space-between;
     display: flex;
-
 `;
 
 export const TextCheckBoxContainer = styled.div `
@@ -244,7 +321,7 @@ export const InputCheckBox = styled.input `
     margin: 0 10px;
     height: 20px;
     width: 30px;
-
+    
 `;
 
 export const LabelCheckBox = styled.span `
@@ -275,6 +352,12 @@ export const FooterContainer = styled.div `
     justify-content: space-between;
     align-items: center;
     margin-top: 25px;
+
+    @media(max-width: 768px){
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+    }
 `;
 
 export const TextFooterContainer = styled.div `
@@ -318,4 +401,8 @@ export const ErrorMessage = styled.span `
     color: red;
     font-size: 12px;
     margin-top: 5px;
+
+    @media(max-width: 768px) {
+        text-align: center;
+    }
 `;

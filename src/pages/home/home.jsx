@@ -51,7 +51,7 @@ function Home() {
 
     const onSubmit = async (data) => {
         try {
-        const response = await axios.post('http://localhost/teste-backend/api/api.php', data)
+        const response = await axios.post('http://localhost/teste-backend/api/api.php', data);
         if(response.status === 201){
             alert('Formulário enviado com sucesso');
             const newTabe = window.open('/data', '_blank');
