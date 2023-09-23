@@ -54,7 +54,6 @@ function PessoalInfoStage({ register, errors }){
             <ErrorMessage>{errors.email?.message}</ErrorMessage>
           </InputContainer>
           
-
           <LineContainerInput>
             
             <InputContainer>
